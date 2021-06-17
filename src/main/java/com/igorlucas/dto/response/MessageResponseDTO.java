@@ -1,4 +1,4 @@
-package com.igorlucas.DTO;
+package com.igorlucas.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
