@@ -1,20 +1,28 @@
 package com.igorlucas.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Embeddable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
-@Embeddable
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,17 +30,22 @@ public class Person implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private Integer age;
 	
-	public Person() {}
+	@Column(nullable = false)
+	private String firstName;
 	
-	public Person(Long id, String name, Integer age) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.age = age;
-	}
+	@Column(nullable = false)
+	private String lastName;
+	
+	@Column(nullable = false, unique = true)
+	private String cpf;
+	
+	private LocalDate birthDate;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	private List<Phone> phones;
+	
+	
 	
 	
 

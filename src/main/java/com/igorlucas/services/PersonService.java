@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.igorlucas.DTO.MessageResponseDTO;
 import com.igorlucas.entities.Person;
 import com.igorlucas.repositories.PersonRepository;
 
@@ -22,6 +23,14 @@ public class PersonService {
 	public Person findById(Long id) {
 		Optional<Person> person = personRepository.findById(id);
 		return person.get();
+	}
+	
+	public MessageResponseDTO insert(Person person) {
+		Person savedPerson = personRepository.save(person);
+		return MessageResponseDTO.
+				builder()
+				.message("Saved person with ID " + savedPerson.getId())
+				.build();
 	}
 
 }
