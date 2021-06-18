@@ -38,16 +38,28 @@ public class PersonService {
 	
 	public MessageResponseDTO insert(PersonDTO personDto) {
 		Person person = personMapper.toModel(personDto);
-		Person savedPerson = personRepository.save(person);
-		return MessageResponseDTO.
-				builder()
-				.message("Saved person with ID " + savedPerson.getId())
-				.build();
+		personRepository.save(person);
+		return generateResponse("Saved", person.getId());
 	}
 	
 	public void deleteById(Long id) throws PersonNotFoundException {
 		Person person = verifyIfExists(id);
 		personRepository.delete(person);
+	}
+	
+	public MessageResponseDTO updateById(Long id, PersonDTO personDto) throws PersonNotFoundException {
+		verifyIfExists(id);
+		Person personToUpdate = personMapper.toModel(personDto);
+		personToUpdate.setId(id);
+		personRepository.save(personToUpdate);
+		return generateResponse("Updated", personToUpdate.getId());
+	}
+
+	private MessageResponseDTO generateResponse(String operation, Long id) {
+		return MessageResponseDTO.
+				builder()
+				.message(operation + " person with ID " + id)
+				.build();
 	}
 	
 	private Person verifyIfExists(Long id) throws PersonNotFoundException {
