@@ -8,15 +8,14 @@ import com.igorlucas.dto.request.PersonDTO;
 import com.igorlucas.entities.Person;
 
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PersonMapper {
 	
 	PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 	
-	@Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
+	@Mapping(target = "birthDate", source = "birthDate", dateFormat = "yyyy-MM-dd")
 	Person toModel(PersonDTO personDTO);
 	
-	@Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
 	PersonDTO toDTO(Person person);
 
 }

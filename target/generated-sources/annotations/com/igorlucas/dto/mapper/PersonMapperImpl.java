@@ -8,12 +8,14 @@ import com.igorlucas.entities.Phone;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-06-17T18:21:01-0300",
+    date = "2021-06-17T20:56:57-0300",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.3.1200.v20200916-0645, environment: Java 15.0.2 (Oracle Corporation)"
 )
+@Component
 public class PersonMapperImpl implements PersonMapper {
 
     @Override

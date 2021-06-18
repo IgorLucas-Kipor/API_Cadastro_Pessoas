@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.igorlucas.dto.request.PersonDTO;
 import com.igorlucas.dto.response.MessageResponseDTO;
-import com.igorlucas.entities.Person;
+import com.igorlucas.exception.PersonNotFoundException;
 import com.igorlucas.services.PersonService;
 
 @RestController
@@ -28,15 +28,15 @@ public class PersonController {
 	private PersonService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Person>> findAll() {
-		List<Person> list = service.findAll();
+	public ResponseEntity<List<PersonDTO>> findAll() {
+		List<PersonDTO> list = service.findAll();
 		return ResponseEntity.ok(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Person> findById(@PathVariable Long id) {
-		Person person = service.findById(id);
-		return ResponseEntity.ok(person);
+	public ResponseEntity<PersonDTO> findById(@PathVariable Long id) throws PersonNotFoundException {
+		PersonDTO personDTO = service.findById(id);
+		return ResponseEntity.ok(personDTO);
 	}
 	
 	@PostMapping
