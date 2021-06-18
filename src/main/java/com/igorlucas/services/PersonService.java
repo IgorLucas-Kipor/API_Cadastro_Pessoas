@@ -1,7 +1,6 @@
 package com.igorlucas.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class PersonService {
 	}
 	
 	public PersonDTO findById(Long id) throws PersonNotFoundException{
-		Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
+		Person person = verifyIfExists(id);
 		return personMapper.toDTO(person);
 	}
 	
@@ -44,6 +43,16 @@ public class PersonService {
 				builder()
 				.message("Saved person with ID " + savedPerson.getId())
 				.build();
+	}
+	
+	public void deleteById(Long id) throws PersonNotFoundException {
+		Person person = verifyIfExists(id);
+		personRepository.delete(person);
+	}
+	
+	private Person verifyIfExists(Long id) throws PersonNotFoundException {
+		return personRepository.findById(id)
+				.orElseThrow(() -> new PersonNotFoundException(id));
 	}
 
 }
