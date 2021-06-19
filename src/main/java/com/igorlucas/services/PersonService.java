@@ -38,8 +38,8 @@ public class PersonService {
 	
 	public MessageResponseDTO insert(PersonDTO personDto) {
 		Person person = personMapper.toModel(personDto);
-		personRepository.save(person);
-		return generateResponse("Saved", person.getId());
+		Person personToSave = personRepository.save(person);
+		return generateResponse("Saved", personToSave.getId());
 	}
 	
 	public void deleteById(Long id) throws PersonNotFoundException {

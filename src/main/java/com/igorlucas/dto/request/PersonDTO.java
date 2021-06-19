@@ -9,8 +9,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.igorlucas.entities.Phone;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +38,6 @@ public class PersonDTO {
 	
 	@NotEmpty
 	@Valid
-	private List<Phone> phones;
+	private List<PhoneDTO> phones;
 
 }
