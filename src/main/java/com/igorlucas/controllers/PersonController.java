@@ -22,11 +22,13 @@ import com.igorlucas.dto.response.MessageResponseDTO;
 import com.igorlucas.exception.PersonNotFoundException;
 import com.igorlucas.services.PersonService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 	
-	@Autowired
 	private PersonService service;
 	
 	@GetMapping
